@@ -212,3 +212,109 @@ else j++;
 } return ans;
 }
 };
+
+	
+// String 
+Q1. Check Valid parenthesis
+	
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> p;
+        for(int i=0; i<s.size(); i++){
+            char c=s[i];
+            if(c=='(' || c=='['|| c=='{'){
+                p.push(c);
+            }
+            else {
+                if(!p.empty()){
+                 char top= p.top();
+                    if(c==']' && top=='['||
+                       c==')'&& top=='('|| 
+                       c=='}'&& top=='{'){
+                        p.pop();
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            
+        }
+        if(p.empty()){
+            return true;
+        }
+        else{
+           return false;
+        }
+    }
+        
+};
+
+Q2. Finding substring in given string 
+				 
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+        if(needle.length()==0){
+            return 0;
+        }
+       int x=haystack.find(needle);
+           if(x !=-1){
+               return x;
+           }
+           else{
+               return -1;
+           }
+        
+    }
+};
+				 
+Q3. Longest Prefix
+	
+ class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        if(strs.size()==1){
+            return strs[0];
+        }
+        string s=strs[0];
+        int i=0;
+        while(true){
+            for(int j=1; j<strs.size(); j++){
+                if(strs[j].size()==i || strs[j][i]!=s[i]){
+                    return s.substr(0,i);
+                }
+            }
+            i++;
+        }
+        
+        return "";
+    }
+};
+
+Q4.Integer to roman
+
+class Solution {
+public:
+ 
+    string intToRoman(int num) {
+        int val[] = {1000,900,500,400,100,90,50,40,10,9,5,4,1};
+ string roman[]={"M","CM","D","CD","C","XC","L","XL","X","IX","V","IV","I"};
+        string p="";
+        int i=0;
+        while(num){
+            
+            while(num>=val[i]){
+                p+=roman[i];
+                num-=val[i];
+            }
+            i++;
+        }
+         return p; 
+    }
+    
+};
