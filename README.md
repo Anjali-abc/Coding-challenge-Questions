@@ -318,3 +318,237 @@ public:
     }
     
 };
+
+//Mathematical problem
+
+Q1.minimum moves to make all elements of array are equal
+	
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(), nums.end());
+        int x=nums[0];
+        int count=0;
+        for( int i=0; i<n; i++){
+              count+=nums[i]-x;
+     }
+        return count;
+        
+    }
+};
+
+Q2.Add two binary strings		
+			   
+class Solution {
+public:
+    string addBinary(string a, string b) {
+        int n1=a.size();
+        int n2=b.size();
+        int carry=0;
+        int i=0;
+        string ans="";
+        while(i<n1 || i<n2 || carry!=0){
+            int x=0;
+            if(i<n1 && a[n1-i-1]=='1'){
+                x=1;
+            }
+            int y=0;
+            if(i<n2 && b[n2-i-1]=='1'){
+                y=1;
+            }
+            ans=to_string((x+y+carry)%2)+ ans;
+            carry=(x+y+carry)/2;
+            i=i+1;
+        }
+        
+        return ans;
+    }
+};
+		    
+Q3.Find Maximum product of three number.
+
+class Solution {
+public:
+    int maximumProduct(vector<int>& nums) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        long long x,y,z;
+        x=nums[n-1]*nums[n-2]*nums[n-3];
+        y=nums[n-1]*nums[0]*nums[1];
+        z=nums[0]*nums[1]*nums[2];
+        return max(x,max(y,z));
+    }
+};
+
+Q4.//input
+A -> 1
+B -> 2
+C -> 3
+...
+Z -> 26
+AA -> 27
+AB -> 28 
+...
+
+class Solution {
+public:
+    string convertToTitle(int columnNumber) {
+        string ans="";
+        int rem;
+        while(columnNumber){
+            columnNumber--;
+            rem=columnNumber%26;
+            char c='A'+rem;
+            ans=c+ans;
+            columnNumber/=26;
+        }
+        return ans;
+       }
+};	
+	
+Q5.Input:
+n = 19
+Output: true
+Explanation:
+12 + 92 = 82
+82 + 22 = 68
+62 + 82 = 100
+12 + 02 + 02 = 1
+	
+class Solution {
+public:
+       bool isHappy(int n){
+           if(n==1){
+               return true;
+           }
+           if(n==2 || n==3 || n==4|| n==5|| n==6|| n==8|| n==9){
+               return false;
+           }
+           if(n==7){
+               return true;
+           }
+           int sum=0;
+           int r;
+           while(n!=0){
+                r=n%10;
+                sum+=r*r;
+                n=n/10;
+           }
+           if(sum==1){
+               return true;
+           }
+           else{
+               return isHappy(sum);
+           }
+           
+}
+};
+	
+Q6.Palindrome number
+
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        if(x<0){
+            return false;
+        }
+         int n=x;
+         long long int s=0;
+        while(x!=0){
+            int r=x%10;
+            s=(long long int)(s * 10)+r;
+            x/=10;
+         }
+        
+        if(s==n){
+            return true;
+       }
+        else{
+            return false;
+        }
+    }
+};
+
+Q7.Find Missing Number
+		 
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        int n=nums.size();
+        int x;
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<n; i++){
+           if(nums[i]!=i){
+                return i;
+            }
+           
+        }
+        return n;
+    }
+};
+
+Q8.Find Reverse of given Digit with given constraints.
+
+class Solution {
+public:
+    int reverse(int x) {
+        long long int rev=0;
+        
+        while(x!=0){
+            int r=x%10;
+            rev=(long long int)(rev*10)+r;
+            x=x/10;
+        }
+//following is the constraints
+        if(rev>INT_MAX || rev<INT_MIN){
+            return 0;
+}
+        return rev;
+    }
+};
+					
+Q8. Find Power of Two.
+					
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+        if(n==1){
+            return true;
+        }
+        if(n<1){
+            return false;
+        }
+        while(n>=2){
+            if(n%2!=0){
+                return false;
+            }
+            n=n/2;
+        }
+         return true; 
+    }
+	
+Q9.Input: n = 12, k = 3
+Output: 3
+Explanation: Factors list is [1, 2, 3, 4, 6, 12], the 3rd factor is 3.
+	
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        vector<int> temp;
+        
+        for(int i=1; i<=n; i++){
+            if(n%i==0){
+                temp.push_back(i);
+            }
+            
+        }
+        if(temp.size()<k){
+            return -1;
+        }
+       else{
+        return temp[k-1];
+       }
+    }
+};	
+	
