@@ -551,4 +551,48 @@ public:
        }
     }
 };	
+
 	
+//Linked List	
+
+Q1.Find Midddle of linked list
+	
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        int x=0;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            x++;
+            temp=temp->next;
+        }
+        temp=head;
+        for(int i=0; i<x/2; i++){
+            temp=temp->next;
+        }
+       return temp;
+    }
+};
+	
+Q2.Find if cycle present in linked list or not.
+	
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(head==NULL){
+            return false;
+        }
+        ListNode* slow=head;
+        ListNode* fast=head;
+        while(fast!=NULL && fast->next!=NULL){
+            fast=fast->next->next;
+            slow=slow->next;
+            if(fast==slow){
+                return true;
+            }
+        }
+        return false;
+    }
+};
+	
+Q3.	
