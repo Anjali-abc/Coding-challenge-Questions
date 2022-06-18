@@ -595,4 +595,49 @@ public:
     }
 };
 	
-Q3.	
+Q3.Remove Duplicates From sorted list
+	
+class Solution {
+public:
+    ListNode* deleteDuplicates(ListNode* head) {
+        ListNode* temp=head;
+        if(head==NULL){
+            return head;
+        }
+       
+        while(temp->next!=NULL){
+            if(temp->val==temp->next->val){
+                temp->next=temp->next->next;
+            }
+            else{
+                temp=temp->next;
+            }
+        }
+        return head;
+        
+    }
+};	
+
+Q4. Convert Binary number in linked list to integer.
+
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        
+        ListNode* temp=head;
+        int n=0;
+        while(temp->next!=NULL){
+            n++;
+            temp=temp->next;
+            
+        }
+        temp=head;
+        int dec=0;
+        while(temp!=NULL){
+            dec=dec+temp->val*pow(2,n);
+            n--;
+            temp=temp->next;
+        }
+        return dec;
+    }
+};
