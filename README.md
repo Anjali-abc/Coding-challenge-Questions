@@ -641,3 +641,112 @@ public:
         return dec;
     }
 };
+
+Q5.Remove linked list element.
+
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* temp=head;
+        ListNode* prev;
+        if(head==NULL){
+            return head;
+        }
+        while(temp!=NULL){
+             
+            if(temp->val==val){
+                if(temp==head){
+                    head=temp->next;
+                }
+                else{
+                    prev->next=temp->next;
+                    temp=temp->next;
+                }
+                 
+           }
+            else{
+                prev=temp;
+                temp=temp->next;
+            }
+        }
+        return head;
+    }
+};
+
+Q6.Merge Two sorted linked list.
+
+// Recursive approach
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* result;
+        if(list1==NULL){
+            return list2;
+        }
+        if(list2==NULL){
+            return list1;
+        }
+        if(list1->val < list2->val){
+            result=list1;
+            result->next=mergeTwoLists(list1->next, list2);
+        }
+        else{
+            result=list2;
+            result->next=mergeTwoLists(list1, list2->next);
+        }
+        return result;
+    }
+};
+
+//Iterative approach
+
+node *merge(node* list1,node* list2){
+node* p1=list1;
+node* p2=list2;
+node* list3=new node(-1);
+node* p3=list3;
+
+while(p1!=NULL && p2!=NULL){
+if(p1->val < p2->val){
+p3->next=p1;
+p1=p1->next;
+}
+else{
+p3->next=p2;
+p2=p2->next;
+}
+p3=p3->next;
+}
+while(p1!=NULL){
+p3->next=p1;
+p1=p1->next;
+p3=p3->next;
+}
+while(p2!=NULL){
+p3-.next=p2;
+p2=p2->next;
+p3=p3->next;
+}
+return list3->next;
+}
+
+Q7.Reverse Linked list
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev=NULL;
+        ListNode* curr=head;
+        ListNode* nextp;
+        while(curr!=NULL){
+            nextp=curr->next;
+            curr->next=prev;
+            
+            prev=curr;
+            curr=nextp;
+        }
+        return prev;
+    }
+};
+
+
