@@ -791,5 +791,89 @@ public:
     }
 };
 
+Q9. Sort list.
+
+ class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+         if(head==NULL || head->next==NULL){
+             return head;
+         }
+        ListNode* temp=NULL;
+        ListNode* slow=head;
+        ListNode* fast= head;
+        while(fast!=NULL && fast->next!=NULL){
+            temp=slow;
+            slow=slow->next;
+            fast=fast->next->next;
+        }
+        temp->next=NULL;
+        
+        ListNode* l1=sortList(head);
+        ListNode* l2=sortList(slow);
+        
+        return mergeList(l1,l2);
+        
+    }
+    ListNode* mergeList(ListNode* l1, ListNode* l2){
+         ListNode* p1=l1;
+         ListNode* p2=l2;
+         ListNode* l3=new  ListNode(0);
+         ListNode* p3=l3;
+        while(p1!=NULL && p2!=NULL){
+            if(p1->val < p2->val){
+                p3->next=p1;
+                p1=p1->next;
+            }
+            else{
+                p3->next=p2;
+                p2=p2->next;
+            }
+            p3=p3->next;
+        }
+    
+    while(p1!=NULL){
+        p3->next=p1;
+        p1=p1->next;
+        p3=p3->next;
+    }
+     while(p2!=NULL){
+        p3->next=p2;
+        p2=p2->next;
+        p3=p3->next;
+    }
+    return l3->next;
+    }
+}; 
+
+Q10. Add two numbers.
+
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* l3= new ListNode(0);
+        ListNode* p=l3;
+        long sum=0, carry=0;
+        while(l1!=NULL || l2!=NULL || carry!=0){
+            sum=0;
+            if(l1!=NULL){
+                sum=sum+l1->val;
+                l1=l1->next;
+            }
+            if(l2!=NULL){
+                sum=sum+l2->val;
+                l2=l2->next;
+            }
+            sum=sum+carry;
+            int a=sum%10;
+            ListNode* n=new ListNode(a);
+            p->next=n;
+            p=n;
+            carry=sum/10;
+        }
+        return l3->next;
+        
+    }
+};
 
 
