@@ -876,4 +876,72 @@ public:
     }
 };
 
+Q.Three Sum....
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+          int n = nums.size();
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        for(int i=0; i<n; i++)
+        {
+            int tar = -nums[i];
+            
+            int a=i+1, b=n-1;
+            while(a<b)
+            {
+                int x = nums[a];
+                int y = nums[b];
+                if(x+y<tar)
+                    a++;
+                else if(x+y>tar)
+                    b--;
+                else
+                {
+                    ans.push_back({x, y, nums[i]});
+                    while(a<i && nums[a]==x)
+                        a++;
+                    while(b>i && nums[b]==y)
+                        b--;
+                }
+            }
+            while(i<n-1 && nums[i+1]==nums[i])
+                i++;
+        }
+        return ans;
+    }
+};
 
+Q.Three Sum closest..
+
+class Solution {
+public:
+    int threeSumClosest(vector<int>& nums, int target) {
+        int n=nums.size();
+        sort(nums.begin(),nums.end());
+        int closest=nums[0]+nums[1]+nums[2];
+        for(int i=0; i<n; i++){
+          
+            
+            int a=i+1, b=n-1;
+            while(a<b)
+            {
+                int sum=nums[i]+nums[a]+nums[b];
+                if(abs(target-sum)<abs(target-closest)){
+                    closest=sum;
+                }
+               if(sum<target){
+                    a++;
+                }
+                else if(sum > target){
+                    b--;
+                }
+                else{
+                    return sum;
+                }
+            }   
+
+        }
+        return closest;
+    }
+};
